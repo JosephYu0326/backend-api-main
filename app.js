@@ -11,6 +11,9 @@ var usersRouter = require('./routes/users');
 const categoriesRouter = require('./routes/categories');
 const productsRouter = require('./routes/products');
 const addcategoriesRouter = require('./routes/addcategories')
+const addExhibition = require('./routes/addExhibition')
+const AboutRouter = require('./routes/About')
+const editExhibition = require('./routes/EditExhibition')
 
 var app = express();
 
@@ -27,11 +30,14 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/About', AboutRouter);
 //http://localhost:3001/categories
 app.use('/categories',categoriesRouter);
 //http://localhost:3001/products
 app.use('/products',productsRouter);
 app.use('/addcategories',addcategoriesRouter);
+app.use('/addExhibition',addExhibition);
+app.use('/editExhibition',editExhibition);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
