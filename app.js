@@ -14,6 +14,7 @@ const addcategoriesRouter = require('./routes/addcategories')
 const addExhibition = require('./routes/addExhibition')
 const AboutRouter = require('./routes/About')
 const editExhibition = require('./routes/EditExhibition')
+const uploadImage = require("./routes/uploadImage")
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use('/products',productsRouter);
 app.use('/addcategories',addcategoriesRouter);
 app.use('/addExhibition',addExhibition);
 app.use('/editExhibition',editExhibition);
+app.use('/uploadImage',uploadImage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
