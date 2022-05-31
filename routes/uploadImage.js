@@ -3,17 +3,25 @@ const { json } = require('express/lib/response');
 const router = express.Router();
 const multer = require('multer');
 const db = require('../modules/mysql_config');
+const ext={
+    'image/jpeg':'.jpg',
+    'image/png':'.png',
+    'image/gif':'.gif',
+}
 var storage = multer.diskStorage({
     destination: (req, file, callBack) => {
-        callBack(null, '../public/images/')     // './public/images/' directory name where save the file
+        callBack(null, '/public/')     // './public/images/' directory name where save the file
     },
     filename: (req, file, callBack) => {
-        callBack(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+        cb(null,new Date().getTime()+ext[file.mimetype])
     }
 })
-var upload = multer({storage:storage})
+const fileFilter = (res,file,cb)=>{
+    cb(null, !!ext[file.mimetype]);
+  }
+const upload = multer({storage:fileFilter})
 router.post('/',upload.single("image"), async function(req, res, next) {
-    console.log(req.file.filename)
+    console.log(req.body)
 
     res.send("上傳成功")
     
